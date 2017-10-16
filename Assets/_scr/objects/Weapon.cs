@@ -18,9 +18,16 @@ public class Weapon:MonoBehaviour
     protected Tween _changeInTween;          // played when changing TO this weapon
     protected string _ammunition;            // which type of ammo the weapon uses
     protected uint _ammoPerShot;             // how many items of ammo the weapon needs in order to fire
-    protected Transform _cameraTransform;    // camera transform of parent object
     protected Transform _displayTransform;   // transform of display mesh
-    protected Vector3 _shotOrigin;           // the point on the model where shots originate
+    public Transform displayTransform
+    {
+        get
+        {
+            return _displayTransform;
+        }
+    }
+    protected Transform _shotOrigin;         // the point on the model where shots originate
+    protected bool _active; 
 
     public virtual void Fire()
     {

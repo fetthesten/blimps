@@ -4,32 +4,37 @@ using UnityEngine;
 
 public class fpsWeapon : MonoBehaviour 
 {
-    public float cooldown = .3f;
-
-    private Camera _camera;
-    private float _nextShot;
-    private Weapon _currentWeapon;
+    private Transform _cameraTransform;
+    private Weapon[] _weapons;
+    private uint _currentWeapon;
 
 	void Start () 
 	{
-        _camera = gameObject.GetComponentInChildren<Camera>();
-        _nextShot = Time.fixedTime;
-        _currentWeapon = gameObject.GetComponent<Weapon>();
+        _cameraTransform = gameObject.GetComponentInChildren<Camera>().transform;
+        _currentWeapon = 0;
+        SetUpWeapons();
 	}
 	
 	void Update () 
 	{
+        var w = CurrentWeapon();
+        w.displayTransform.position = _cameraTransform.position;
+        w.displayTransform.rotation = _cameraTransform.rotation;
         if (Input.GetButton("Fire1"))
-            _currentWeapon.Fire();
+            CurrentWeapon().Fire();
 	}
 
-    void Fire()
+    Weapon CurrentWeapon()
     {
-        if (Time.fixedTime >= _nextShot)
-        {
-            //Debug.DrawRay(transform.position + Vector3.up, _camera.transform.forward, Color.red, cooldown);
+        return _weapons[_currentWeapon];
+    }
 
-            _nextShot = Time.fixedTime + cooldown;
-        }
+    void SetUpWeapons()
+    {
+        _weapons = gameObject.GetComponents<Weapon>();
+        for (uint i = 0; i < _weapons.Length; ++i)
+            _weapons[i].gameObject.SetActive(false);
+
+        _weapons[0].gameObject.SetActive(true);
     }
 }

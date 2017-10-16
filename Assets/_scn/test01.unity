@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -8279,7 +8279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b6a48fe85a53c4d8b52d88b2f6bbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0.3
 --- !u!114 &1583098749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8342,10 +8341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a011e0fa461774ab292871f5835525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupPrefab: {fileID: 1665859157267412, guid: f1af9d0bef1c5ba4fb8059e4937ed70f,
-    type: 2}
-  displayPrefab: {fileID: 1665859157267412, guid: f1af9d0bef1c5ba4fb8059e4937ed70f,
-    type: 2}
 --- !u!43 &1778824880
 Mesh:
   m_ObjectHideFlags: 0
