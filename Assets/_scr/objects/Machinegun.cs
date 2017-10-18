@@ -12,7 +12,7 @@ public class Machinegun : Weapon
 
         _cooldownTime = .1f;
 
-        SetDisplayModel();
+        SetDisplayModelAndTweens();
     }
 
     public override void Fire()

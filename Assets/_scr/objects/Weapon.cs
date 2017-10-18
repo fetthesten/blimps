@@ -30,22 +30,20 @@ public class Weapon:MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        _chargeTween = DOTween.Sequence();
-        _fireTween = DOTween.Sequence();
-        _cooldownTween = DOTween.Sequence();
-        _changeOutTween = DOTween.Sequence();
-        _changeInTween = DOTween.Sequence();
-    }
-
     public virtual void Fire()
     {
         Debug.Log(_name + " fired");
     }
 
-    protected virtual void SetDisplayModel()
+    protected virtual void SetDisplayModelAndTweens()
     {
+        // int tween sequences
+        _chargeTween = DOTween.Sequence();
+        _fireTween = DOTween.Sequence();
+        _cooldownTween = DOTween.Sequence();
+        _changeOutTween = DOTween.Sequence();
+        _changeInTween = DOTween.Sequence();
+
         // load and then hide display model
         if (_displayPrefab)
         {
@@ -61,12 +59,26 @@ public class Weapon:MonoBehaviour
     public virtual void SwitchOut()
     {
         _active = false;
-        _displayObject.SetActive(false);
+        if (_changeOutTween.Duration() != .0f)
+        {
+            _changeOutTween.Play().OnComplete(() => 
+            {
+                _displayObject.SetActive(false);
+                _changeOutTween.Rewind();
+            });
+        }
     }
 
     public virtual void SwitchIn()
     {
-        _active = true;
         _displayObject.SetActive(true);
+        if (_changeInTween.Duration() != .0f)
+        {
+            _changeInTween.Play().OnComplete(() => 
+            {
+                _changeInTween.Rewind();
+                _active = true;
+            });
+        }
     }
 }
